@@ -46,6 +46,7 @@ import {
 	OpencodeGoHandler,
 	KenariHandler,
 	NanoGptHandler,
+	CheaperInferenceHandler,
 	ZooGatewayHandler,
 	MiniMaxHandler,
 	MimoHandler,
@@ -265,6 +266,8 @@ export function buildApiHandler(configuration: ProviderSettings): ApiHandler {
 			return new KenariHandler(options)
 		case providerIdentifiers.nanogpt:
 			return new NanoGptHandler(options)
+		case providerIdentifiers.cheaperInference:
+			return new CheaperInferenceHandler(options)
 		case providerIdentifiers.zooGateway:
 			return new ZooGatewayHandler(options)
 		case providerIdentifiers.minimax:

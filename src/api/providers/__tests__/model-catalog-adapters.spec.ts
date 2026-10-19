@@ -10,6 +10,7 @@ import type { GetModelsOptions } from "../../../shared/api"
 import type { ApiHandler, ModelCacheScope } from "../../index"
 
 const fetchers = vi.hoisted(() => ({
+	getCheaperInferenceModels: vi.fn(),
 	getDeepSeekModels: vi.fn(),
 	getKenariModels: vi.fn(),
 	getKimiCodeModels: vi.fn(),
@@ -27,6 +28,10 @@ const fetchers = vi.hoisted(() => ({
 	getZooGatewayModels: vi.fn(),
 }))
 
+vi.mock("../fetchers/cheaper-inference", async (importOriginal) => ({
+	...(await importOriginal<typeof import("../fetchers/cheaper-inference")>()),
+	getCheaperInferenceModels: fetchers.getCheaperInferenceModels,
+}))
 vi.mock("../fetchers/deepseek", async (importOriginal) => ({
 	...(await importOriginal<typeof import("../fetchers/deepseek")>()),
 	getDeepSeekModels: fetchers.getDeepSeekModels,
@@ -89,6 +94,7 @@ vi.mock("../fetchers/zoo-gateway", async (importOriginal) => ({
 }))
 
 import { AnthropicHandler } from "../anthropic"
+import { CheaperInferenceHandler } from "../cheaper-inference"
 import { DeepSeekHandler } from "../deepseek"
 import { KenariHandler } from "../kenari"
 import { KimiCodeHandler } from "../kimi-code"
@@ -123,6 +129,14 @@ interface AdapterCase {
 }
 
 const cases: AdapterCase[] = [
+	{
+		name: "Cheaper Inference",
+		create: () => new CheaperInferenceHandler({ cheaperInferenceApiKey: API_KEY }),
+		fetcher: "getCheaperInferenceModels",
+		scope: { urlScoped: false, keyScoped: true, authScoped: false },
+		expectedArgs: [API_KEY],
+		forwardsSignal: true,
+	},
 	{
 		name: "DeepSeek",
 		create: () => new DeepSeekHandler({ deepSeekApiKey: API_KEY }),

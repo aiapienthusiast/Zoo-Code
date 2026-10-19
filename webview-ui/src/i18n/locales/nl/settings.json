@@ -411,6 +411,8 @@
 		"getOpencodeGoApiKey": "Opencode Go API-sleutel ophalen",
 		"kenariApiKey": "Kenari API-sleutel",
 		"getKenariApiKey": "Kenari API-sleutel ophalen",
+		"cheaperInferenceApiKey": "Cheaper Inference API-sleutel",
+		"getCheaperInferenceApiKey": "Cheaper Inference API-sleutel ophalen",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "NanoGPT API-sleutel",

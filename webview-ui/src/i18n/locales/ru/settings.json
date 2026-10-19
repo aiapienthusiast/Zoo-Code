@@ -411,6 +411,8 @@
 		"getOpencodeGoApiKey": "Получить ключ API Opencode Go",
 		"kenariApiKey": "Ключ API Kenari",
 		"getKenariApiKey": "Получить ключ API Kenari",
+		"cheaperInferenceApiKey": "Ключ API Cheaper Inference",
+		"getCheaperInferenceApiKey": "Получить ключ API Cheaper Inference",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "Ключ API NanoGPT",

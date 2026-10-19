@@ -229,6 +229,24 @@ describe("getModels with new GetModelsOptions", () => {
 		expect(result).toEqual(mockModels)
 	})
 
+	it("dispatches Cheaper Inference with its API key", async () => {
+		const mockModels = {
+			"gpt-5.4-mini": {
+				maxTokens: 128000,
+				contextWindow: 400000,
+				supportsPromptCache: false,
+			},
+		}
+		const fetchModels = vi.fn().mockResolvedValue(mockModels)
+		const handler = makeHandler({ urlScoped: false, keyScoped: true, authScoped: false }, fetchModels)
+
+		const options = { provider: providerIdentifiers.cheaperInference, apiKey: "cheaper-inference-key" } as const
+		const result = await getModels(options, handler)
+
+		expect(fetchModels).toHaveBeenCalledWith(options, expect.any(AbortSignal))
+		expect(result).toEqual(mockModels)
+	})
+
 	it("handles errors and re-throws them", async () => {
 		const expectedError = new Error("LiteLLM connection failed")
 		const fetchModels = vi.fn().mockRejectedValue(expectedError)

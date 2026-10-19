@@ -60,6 +60,7 @@ describe("Model Validation Functions", () => {
 		"opencode-go": {},
 		kenari: {},
 		nanogpt: {},
+		"cheaper-inference": {},
 		"zoo-gateway": {},
 		"kimi-code": {},
 		moonshot: {},
@@ -433,6 +434,30 @@ describe("Model Validation Functions", () => {
 
 			const result = getModelValidationError(config, mockRouterModels, allowAllOrganization)
 			expect(result).toBe("settings:validation.modelId")
+		})
+	})
+
+	describe("Cheaper Inference validation", () => {
+		it("returns an apiKey error when the Cheaper Inference API key is missing", () => {
+			const config: ProviderSettings = {
+				apiProvider: providerIdentifiers.cheaperInference,
+				cheaperInferenceModelId: "gpt-5.4-mini",
+				// Missing cheaperInferenceApiKey
+			}
+
+			const result = validateApiConfigurationExcludingModelErrors(config, mockRouterModels, allowAllOrganization)
+			expect(result).toBe("settings:validation.apiKey")
+		})
+
+		it("returns undefined for a valid Cheaper Inference configuration", () => {
+			const config: ProviderSettings = {
+				apiProvider: providerIdentifiers.cheaperInference,
+				cheaperInferenceApiKey: "valid-key",
+				cheaperInferenceModelId: "gpt-5.4-mini",
+			}
+
+			const result = validateApiConfigurationExcludingModelErrors(config, mockRouterModels, allowAllOrganization)
+			expect(result).toBeUndefined()
 		})
 	})
 

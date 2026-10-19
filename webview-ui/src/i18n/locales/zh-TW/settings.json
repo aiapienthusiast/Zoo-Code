@@ -438,6 +438,8 @@
 		"getOpencodeGoApiKey": "取得 Opencode Go API 金鑰",
 		"kenariApiKey": "Kenari API 金鑰",
 		"getKenariApiKey": "取得 Kenari API 金鑰",
+		"cheaperInferenceApiKey": "Cheaper Inference API 金鑰",
+		"getCheaperInferenceApiKey": "取得 Cheaper Inference API 金鑰",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "NanoGPT API 金鑰",

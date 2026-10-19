@@ -1203,6 +1203,7 @@ describe("webviewMessageHandler - requestRouterModels", () => {
 				"opencode-go": mockModels,
 				kenari: mockModels,
 				nanogpt: mockModels,
+				"cheaper-inference": {},
 				"kimi-code": {},
 			},
 			values: undefined,
@@ -1387,6 +1388,62 @@ describe("webviewMessageHandler - requestRouterModels", () => {
 		)
 	})
 
+	it("flushes and fetches Cheaper Inference models when an explicit API key is supplied", async () => {
+		mockClineProvider.getState = vi.fn().mockResolvedValue({
+			apiConfiguration: {},
+		})
+		mockGetModels.mockResolvedValue({
+			"gpt-5.4-mini": {
+				maxTokens: 128000,
+				contextWindow: 400000,
+				supportsPromptCache: false,
+			},
+		})
+
+		await webviewMessageHandler(mockClineProvider, {
+			type: "requestRouterModels",
+			values: {
+				provider: providerIdentifiers.cheaperInference,
+				cheaperInferenceApiKey: "fresh-cheaper-inference-key",
+			},
+		})
+
+		expect(mockFlushModels).toHaveBeenCalledWith(
+			{ provider: providerIdentifiers.cheaperInference, apiKey: "fresh-cheaper-inference-key" },
+			expect.anything(),
+			true,
+		)
+		expect(mockGetModels).toHaveBeenCalledWith(
+			{ provider: providerIdentifiers.cheaperInference, apiKey: "fresh-cheaper-inference-key" },
+			expect.anything(),
+		)
+		expect(mockClineProvider.postMessageToWebview).toHaveBeenCalledWith({
+			type: "routerModels",
+			routerModels: {
+				"cheaper-inference": {
+					"gpt-5.4-mini": expect.objectContaining({ contextWindow: 400000 }),
+				},
+			},
+			values: { provider: providerIdentifiers.cheaperInference },
+		})
+	})
+
+	it("skips Cheaper Inference when no API key is configured", async () => {
+		mockClineProvider.getState = vi.fn().mockResolvedValue({ apiConfiguration: {} })
+		mockGetModels.mockResolvedValue({})
+
+		await webviewMessageHandler(mockClineProvider, {
+			type: "requestRouterModels",
+			values: { provider: providerIdentifiers.cheaperInference },
+		})
+
+		expect(mockGetModels).not.toHaveBeenCalledWith(
+			expect.objectContaining({ provider: providerIdentifiers.cheaperInference }),
+			expect.anything(),
+		)
+		expect(mockFlushModels).not.toHaveBeenCalled()
+	})
+
 	it("handles LiteLLM models with values from message when config is missing", async () => {
 		mockClineProvider.getState = vi.fn().mockResolvedValue({
 			apiConfiguration: {
@@ -1477,6 +1534,7 @@ describe("webviewMessageHandler - requestRouterModels", () => {
 				"opencode-go": mockModels,
 				kenari: mockModels,
 				nanogpt: mockModels,
+				"cheaper-inference": {},
 				"kimi-code": {},
 			},
 			values: undefined,
@@ -1542,6 +1600,7 @@ describe("webviewMessageHandler - requestRouterModels", () => {
 				"opencode-go": mockModels,
 				kenari: mockModels,
 				nanogpt: mockModels,
+				"cheaper-inference": {},
 				"kimi-code": {},
 			},
 			values: undefined,

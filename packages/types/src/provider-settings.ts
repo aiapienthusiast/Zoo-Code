@@ -99,6 +99,7 @@ export const dynamicProviders = [
 	providerIdentifiers.opencodeGo,
 	providerIdentifiers.kenari,
 	providerIdentifiers.nanogpt,
+	providerIdentifiers.cheaperInference,
 	providerIdentifiers.kimiCode,
 ] as const
 
@@ -313,6 +314,7 @@ export const modelIdKeys = [
 	"opencodeGoModelId",
 	"kenariModelId",
 	"nanoGptModelId",
+	"cheaperInferenceModelId",
 	"zooGatewayModelId",
 ] as const satisfies readonly ModelIdKey[]
 
@@ -547,6 +549,11 @@ export const MODELS_BY_PROVIDER: Record<
 	[providerIdentifiers.opencodeGo]: { id: providerIdentifiers.opencodeGo, label: "Opencode Go", models: [] },
 	[providerIdentifiers.kenari]: { id: providerIdentifiers.kenari, label: "Kenari", models: [] },
 	[providerIdentifiers.nanogpt]: { id: providerIdentifiers.nanogpt, label: "NanoGPT", models: [] },
+	[providerIdentifiers.cheaperInference]: {
+		id: providerIdentifiers.cheaperInference,
+		label: "Cheaper Inference",
+		models: [],
+	},
 	[providerIdentifiers.zooGateway]: { id: providerIdentifiers.zooGateway, label: "Zoo Gateway", models: [] },
 
 	// Local providers; models discovered from localhost endpoints.

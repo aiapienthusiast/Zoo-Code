@@ -86,6 +86,7 @@ import {
 	OpenCodeGo,
 	Kenari,
 	NanoGPT,
+	CheaperInference,
 	ZooGateway,
 	MiniMax,
 	Mimo,
@@ -709,6 +710,17 @@ const ApiOptions = ({
 
 					{selectedProvider === providerIdentifiers.nanogpt && (
 						<NanoGPT
+							apiConfiguration={apiConfiguration}
+							setApiConfigurationField={setApiConfigurationField}
+							routerModels={routerModels}
+							organizationAllowList={organizationAllowList}
+							modelValidationError={modelValidationError}
+							simplifySettings={fromWelcomeView}
+						/>
+					)}
+
+					{selectedProvider === providerIdentifiers.cheaperInference && (
+						<CheaperInference
 							apiConfiguration={apiConfiguration}
 							setApiConfigurationField={setApiConfigurationField}
 							routerModels={routerModels}

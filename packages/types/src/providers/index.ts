@@ -26,6 +26,7 @@ export * from "./vercel-ai-gateway.js"
 export * from "./opencode-go.js"
 export * from "./kenari.js"
 export * from "./nanogpt.js"
+export * from "./cheaper-inference.js"
 export * from "./kimi-code.js"
 export * from "./zai.js"
 export * from "./minimax.js"
@@ -57,6 +58,7 @@ import { vercelAiGatewayDefaultModelId } from "./vercel-ai-gateway.js"
 import { opencodeGoDefaultModelId } from "./opencode-go.js"
 import { kenariDefaultModelId } from "./kenari.js"
 import { nanoGptDefaultModelId } from "./nanogpt.js"
+import { cheaperInferenceDefaultModelId } from "./cheaper-inference.js"
 import { kimiCodeDefaultModelId } from "./kimi-code.js"
 import { internationalZAiDefaultModelId, mainlandZAiDefaultModelId } from "./zai.js"
 import { minimaxDefaultModelId } from "./minimax.js"
@@ -138,6 +140,8 @@ export function getProviderDefaultModelId(
 			return kenariDefaultModelId
 		case providerIdentifiers.nanogpt:
 			return nanoGptDefaultModelId
+		case providerIdentifiers.cheaperInference:
+			return cheaperInferenceDefaultModelId
 		case providerIdentifiers.kimiCode:
 			return kimiCodeDefaultModelId
 		case providerIdentifiers.zooGateway:

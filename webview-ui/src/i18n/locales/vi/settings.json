@@ -411,6 +411,8 @@
 		"getOpencodeGoApiKey": "Lấy khóa API Opencode Go",
 		"kenariApiKey": "Khóa API Kenari",
 		"getKenariApiKey": "Lấy khóa API Kenari",
+		"cheaperInferenceApiKey": "Khóa API Cheaper Inference",
+		"getCheaperInferenceApiKey": "Lấy khóa API Cheaper Inference",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "Khóa API NanoGPT",

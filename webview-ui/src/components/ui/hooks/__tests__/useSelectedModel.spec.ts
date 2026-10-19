@@ -18,6 +18,8 @@ import {
 	litellmDefaultModelInfo,
 	kenariDefaultModelId,
 	kenariDefaultModelInfo,
+	cheaperInferenceDefaultModelId,
+	cheaperInferenceDefaultModelInfo,
 	nanoGptDefaultModelId,
 	nanoGptDefaultModelInfo,
 	openAiModelInfoSaneDefaults,
@@ -1284,6 +1286,50 @@ describe("useSelectedModel", () => {
 
 			expect(result.current.id).toBe(nanoGptDefaultModelId)
 			expect(result.current.info).toEqual(nanoGptDefaultModelInfo)
+		})
+	})
+
+	describe("cheaper-inference provider", () => {
+		it("uses dynamic metadata for the configured Cheaper Inference model", () => {
+			const dynamicInfo: ModelInfo = {
+				maxTokens: 128_000,
+				contextWindow: 1_000_000,
+				supportsImages: true,
+				supportsPromptCache: false,
+			}
+			mockUseRouterModels.mockReturnValue(
+				createRouterModelsResult({ "cheaper-inference": { "claude-sonnet-5": dynamicInfo } }),
+			)
+			mockUseOpenRouterModelProviders.mockReturnValue(createOpenRouterModelProvidersResult({}))
+
+			const { result } = renderHook(
+				() =>
+					useSelectedModel({
+						apiProvider: providerIdentifiers.cheaperInference,
+						cheaperInferenceModelId: "claude-sonnet-5",
+					}),
+				{ wrapper: createWrapper() },
+			)
+
+			expect(result.current.id).toBe("claude-sonnet-5")
+			expect(result.current.info).toEqual(dynamicInfo)
+		})
+
+		it("uses the Cheaper Inference fallback when its dynamic catalog is empty", () => {
+			mockUseRouterModels.mockReturnValue(createRouterModelsResult({ "cheaper-inference": {} }))
+			mockUseOpenRouterModelProviders.mockReturnValue(createOpenRouterModelProvidersResult({}))
+
+			const { result } = renderHook(
+				() =>
+					useSelectedModel({
+						apiProvider: providerIdentifiers.cheaperInference,
+						cheaperInferenceModelId: "missing-model",
+					}),
+				{ wrapper: createWrapper() },
+			)
+
+			expect(result.current.id).toBe(cheaperInferenceDefaultModelId)
+			expect(result.current.info).toEqual(cheaperInferenceDefaultModelInfo)
 		})
 	})
 

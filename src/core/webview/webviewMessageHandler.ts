@@ -1151,6 +1151,7 @@ export const webviewMessageHandler = async (
 						[providerIdentifiers.opencodeGo]: {},
 						[providerIdentifiers.kenari]: {},
 						[providerIdentifiers.nanogpt]: {},
+						[providerIdentifiers.cheaperInference]: {},
 						[providerIdentifiers.kimiCode]: {},
 					}
 
@@ -1348,6 +1349,26 @@ export const webviewMessageHandler = async (
 				key: providerIdentifiers.nanogpt,
 				options: { provider: providerIdentifiers.nanogpt, apiKey: nanoGptApiKey },
 			})
+
+			// Cheaper Inference is conditional on apiKey: its /models endpoint requires one.
+			const cheaperInferenceApiKey =
+				message?.values?.cheaperInferenceApiKey ?? apiConfiguration.cheaperInferenceApiKey
+
+			if (cheaperInferenceApiKey) {
+				// Refresh the cache when a new key is explicitly provided (e.g. the Refresh Models button).
+				if (message?.values?.cheaperInferenceApiKey) {
+					await flushModels(
+						{ provider: providerIdentifiers.cheaperInference, apiKey: cheaperInferenceApiKey },
+						handlerFor(apiConfiguration, providerIdentifiers.cheaperInference),
+						true,
+					)
+				}
+
+				candidates.push({
+					key: providerIdentifiers.cheaperInference,
+					options: { provider: providerIdentifiers.cheaperInference, apiKey: cheaperInferenceApiKey },
+				})
+			}
 
 			if (!providerFilter || providerFilter === providerIdentifiers.kimiCode) {
 				const { kimiCodeOAuthManager } = await import("../../integrations/kimi-code/oauth")

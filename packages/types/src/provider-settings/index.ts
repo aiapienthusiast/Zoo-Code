@@ -31,6 +31,7 @@ import { vercelAiGatewayProviderDefinition } from "./vercel-ai-gateway.js"
 import { opencodeGoProviderDefinition } from "./opencode-go.js"
 import { kenariProviderDefinition } from "./kenari.js"
 import { nanoGptProviderDefinition } from "./nanogpt.js"
+import { cheaperInferenceProviderDefinition } from "./cheaper-inference.js"
 import { zooGatewayProviderDefinition } from "./zoo-gateway.js"
 import { basetenProviderDefinition } from "./baseten.js"
 
@@ -83,6 +84,7 @@ export const providerDefinitionList = [
 	opencodeGoProviderDefinition,
 	kenariProviderDefinition,
 	nanoGptProviderDefinition,
+	cheaperInferenceProviderDefinition,
 	zooGatewayProviderDefinition,
 	basetenProviderDefinition,
 ] as const satisfies readonly ProviderDefinition[]

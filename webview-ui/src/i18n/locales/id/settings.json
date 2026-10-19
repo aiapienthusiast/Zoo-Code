@@ -411,6 +411,8 @@
 		"getOpencodeGoApiKey": "Dapatkan Opencode Go API Key",
 		"kenariApiKey": "Kenari API Key",
 		"getKenariApiKey": "Dapatkan Kenari API Key",
+		"cheaperInferenceApiKey": "Cheaper Inference API Key",
+		"getCheaperInferenceApiKey": "Dapatkan Cheaper Inference API Key",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "NanoGPT API Key",

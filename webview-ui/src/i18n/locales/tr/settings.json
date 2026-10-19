@@ -411,6 +411,8 @@
 		"getOpencodeGoApiKey": "Opencode Go API Anahtarı Al",
 		"kenariApiKey": "Kenari API Anahtarı",
 		"getKenariApiKey": "Kenari API Anahtarı Al",
+		"cheaperInferenceApiKey": "Cheaper Inference API Anahtarı",
+		"getCheaperInferenceApiKey": "Cheaper Inference API Anahtarı Al",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "NanoGPT API Anahtarı",

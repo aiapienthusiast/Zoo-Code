@@ -411,6 +411,8 @@
 		"getOpencodeGoApiKey": "Opencode Go API 키 받기",
 		"kenariApiKey": "Kenari API 키",
 		"getKenariApiKey": "Kenari API 키 받기",
+		"cheaperInferenceApiKey": "Cheaper Inference API 키",
+		"getCheaperInferenceApiKey": "Cheaper Inference API 키 받기",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "NanoGPT API 키",

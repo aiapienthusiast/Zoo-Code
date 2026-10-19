@@ -30,6 +30,7 @@ import {
 	opencodeGoDefaultModelId,
 	kenariDefaultModelId,
 	nanoGptDefaultModelId,
+	cheaperInferenceDefaultModelId,
 	zooGatewayDefaultModelId,
 	zaiApiLineConfigs,
 	getZAiModels,
@@ -146,6 +147,10 @@ const PROVIDER_MODEL_CONFIG: Partial<Record<ProviderName, ProviderModelConfig>> 
 	[providerIdentifiers.opencodeGo]: { field: "opencodeGoModelId", default: opencodeGoDefaultModelId },
 	[providerIdentifiers.kenari]: { field: "kenariModelId", default: kenariDefaultModelId },
 	[providerIdentifiers.nanogpt]: { field: "nanoGptModelId", default: nanoGptDefaultModelId },
+	[providerIdentifiers.cheaperInference]: {
+		field: "cheaperInferenceModelId",
+		default: cheaperInferenceDefaultModelId,
+	},
 	[providerIdentifiers.zooGateway]: { field: "zooGatewayModelId", default: zooGatewayDefaultModelId },
 	[providerIdentifiers.openai]: { field: "openAiModelId" },
 	[providerIdentifiers.ollama]: { field: "ollamaModelId" },

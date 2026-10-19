@@ -411,6 +411,8 @@
 		"getOpencodeGoApiKey": "Opencode Go API कुंजी प्राप्त करें",
 		"kenariApiKey": "Kenari API कुंजी",
 		"getKenariApiKey": "Kenari API कुंजी प्राप्त करें",
+		"cheaperInferenceApiKey": "Cheaper Inference API कुंजी",
+		"getCheaperInferenceApiKey": "Cheaper Inference API कुंजी प्राप्त करें",
 		"nanoGpt": {
 			"provider": "NanoGPT",
 			"apiKey": "NanoGPT API कुंजी",

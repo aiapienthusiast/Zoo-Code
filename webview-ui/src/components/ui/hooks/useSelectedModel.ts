@@ -32,6 +32,7 @@ import {
 	opencodeGoDefaultModelInfo,
 	kenariDefaultModelInfo,
 	nanoGptDefaultModelInfo,
+	cheaperInferenceDefaultModelInfo,
 	BEDROCK_1M_CONTEXT_MODEL_IDS,
 	BEDROCK_DEFAULT_CONTEXT,
 	BEDROCK_MAX_TOKENS,
@@ -549,6 +550,17 @@ function getSelectedModel({
 				defaultModelId,
 			)
 			const info = routerModels[providerIdentifiers.nanogpt]?.[id] ?? nanoGptDefaultModelInfo
+			return { id, info }
+		}
+		case providerIdentifiers.cheaperInference: {
+			const id = getValidatedModelId(
+				apiConfiguration.cheaperInferenceModelId,
+				routerModels[providerIdentifiers.cheaperInference],
+				defaultModelId,
+			)
+			// Fall back to the provider's default ModelInfo so capability-driven UI
+			// keeps working when the /models list is empty or unavailable.
+			const info = routerModels[providerIdentifiers.cheaperInference]?.[id] ?? cheaperInferenceDefaultModelInfo
 			return { id, info }
 		}
 		case providerIdentifiers.zooGateway: {
